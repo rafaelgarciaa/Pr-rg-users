@@ -8,13 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class UsersApplication implements CommandLineRunner {
 
-	@Value("${custom.log.message}")
-	private String logMessage;
-	public static void main(String[] args) {
-		SpringApplication.run(UsersApplication.class, args);
-	}
-	@Override
-	public void run(String... args) {
-		System.out.println(logMessage);
-	}
+    @Value("${custom.log.message}")
+    private String logMessage;
+
+    public static void main(String[] args) {
+        SpringApplication.run(UsersApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
+        System.out.println(logMessage);
+    }
 }
