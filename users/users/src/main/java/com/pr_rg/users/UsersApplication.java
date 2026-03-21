@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class UsersApplication implements CommandLineRunner {
 
-    @Value("${custom.log.message}")
+    @Value("${custom.log.message:Mensaje por defecto}")
     private String logMessage;
 
     public static void main(String[] args) {

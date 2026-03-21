@@ -7,6 +7,8 @@ target/
 src/main/resources/application-prod.properties
 src/main/resources/application-local.properties
 
+compose.override.yaml
+
 ### STS ###
 .apt_generated
 .classpath
