@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users") // Opcional: define el nombre de la tabla en la BD
+@Table(name = "users")
 public class User {
 
     @Id
@@ -17,7 +17,6 @@ public class User {
     private String name;
     private String email;
 
-    // Constructor vacío (OBLIGATORIO para JPA)
     public User() {
     }
 
@@ -26,8 +25,6 @@ public class User {
         this.name = name;
         this.email = email;
     }
-
-    // Getters y Setters (OBLIGATORIOS para que JPA acceda a los datos)
     public Long getId() {
         return id;
     }
