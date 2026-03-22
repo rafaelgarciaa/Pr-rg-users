@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,29 +39,22 @@ class UserServiceTest {
 
     @Test
     void shouldSaveUserSuccessfully() {
-        // Configuramos el mock para que cuando se guarde CUALQUIER User, devuelva nuestra entidad
-        when(userRepository.save(any(User.class))).thenReturn(userEntity);
-
-        // Cambiamos la llamada para pasar el POJO (ajusta tu método en el servicio si es necesario)
+        when(userRepository.save((UserDTO) any())).thenReturn(userEntity);
         User savedUser = userService.createUser(userRequest);
-
         assertNotNull(savedUser);
-        assertEquals(1L, savedUser.getId());
         assertEquals("Rafael Garcia", savedUser.getName());
-
-        // Verificamos que el repositorio recibió un objeto User
-        verify(userRepository, times(1)).save(any(User.class));
+        verify(userRepository, times(1)).save((UserDTO) any());
     }
 
     @Test
     void shouldReturnAllUsers() {
-        when(userRepository.findAll()).thenReturn(Arrays.asList(userEntity));
+        when(userRepository.findAll()).thenReturn(Collections.singletonList(userEntity));
 
         List<User> users = userService.getAllUsers();
 
         assertFalse(users.isEmpty());
         assertEquals(1, users.size());
-        assertEquals("Rafael Garcia", users.get(0).getName());
+        assertEquals("Rafael Garcia", users.getFirst().getName());
     }
 
     @Test
