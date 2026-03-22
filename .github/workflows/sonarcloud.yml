@@ -11,15 +11,10 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
 
-    # Esto asegura que todos los pasos 'run' se ejecuten dentro de la carpeta 'users'
-    defaults:
-      run:
-        working-directory: users
-
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones desactivados para mejor análisis
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -38,16 +33,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('users/users/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: >
-          mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent 
-          verify 
-          org.jacoco:jacoco-maven-plugin:report 
-          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
-          -Dsonar.projectKey=rafaelgarciaa_Pr-rg-users
+        run: mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.jacoco:jacoco-maven-plugin:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=rafaelgarciaa_Pr-rg-users
