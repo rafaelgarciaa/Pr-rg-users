@@ -1,8 +1,10 @@
-package com.pr_rg.users.application;
+package project_users.application;
 
-import com.pr_rg.users.domain.model.User;
-import com.pr_rg.users.infrastructure.repository.UserRepository;
+import project_users.domain.model.users.User;
+import project_users.domain.model.usersDto.UserDTO;
+import project_users.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +16,7 @@ public class UserService {
         this.userRepositoryPort = userRepositoryPort;
     }
 
-    public User createUser(User user) { return userRepositoryPort.save(user); }
+    public User createUser(UserDTO user) { return userRepositoryPort.save(user); }
     public List<User> getAllUsers() { return userRepositoryPort.findAll(); }
     public Optional<User> getUserById(Long id) { return userRepositoryPort.findById(id); }
     public void deleteUser(Long id) { userRepositoryPort.deleteById(id); }

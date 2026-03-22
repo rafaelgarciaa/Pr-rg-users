@@ -1,11 +1,8 @@
-package com.pr_rg.users;
+package project_users;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-
-@SpringBootTest
-@ActiveProfiles("dev")
+@SpringBootTest(classes = UsersApplication.class)
 class UsersApplicationTests {
 
 	@Test

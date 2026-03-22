@@ -1,18 +1,28 @@
-# Etapa 1: Construcción (Build)
-FROM eclipse-temurin:21-jdk-alpine AS build
+# --- Etapa 1: Compilación ---
+# Usamos una imagen de Maven oficial que ya tiene Java 21
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 WORKDIR /app
-COPY . .
-# Damos permisos de ejecución al wrapper de Maven y compilamos
-RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-# Etapa 2: Ejecución (Runtime)
+# 1. Copiamos el archivo de configuración de dependencias
+COPY pom.xml .
+
+# 2. Descargamos las dependencias (esto acelera futuros despliegues)
+RUN mvn dependency:go-offline
+
+# 3. Copiamos el código fuente y compilamos
+# Usamos 'mvn' directamente en lugar de './mvnw'
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# --- Etapa 2: Ejecución ---
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-# Copiamos solo el JAR resultante de la etapa anterior
+
+# Copiamos el JAR generado desde la etapa de construcción
 COPY --from=build /app/target/*.jar app.jar
 
-# Exponemos el puerto (Render usará el que definas en sus variables)
+# Exponemos el puerto estándar
 EXPOSE 8080
 
-# Comando de inicio
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Comando para arrancar. IMPORTANTE: Usamos la variable $PORT de Render
+ENTRYPOINT ["java", "-Dserver.port=${PORT:8080}", "-jar", "app.jar"]

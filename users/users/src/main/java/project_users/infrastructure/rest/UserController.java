@@ -1,7 +1,9 @@
-package com.pr_rg.users.infrastructure.rest;
+package project_users.infrastructure.rest;
 
-import com.pr_rg.users.application.UserService;
-import com.pr_rg.users.domain.model.User;
+import jakarta.validation.Valid;
+import project_users.application.UserService;
+import project_users.domain.model.users.User;
+import project_users.domain.model.usersDto.UserDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.createUser(user);
+    public UserDTO create(@Valid @RequestBody UserDTO userDTO) {
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        User savedUser = userService.createUser(UserDTO.fromEntity(user));
+        return UserDTO.fromEntity(savedUser);
     }
 
     @GetMapping
