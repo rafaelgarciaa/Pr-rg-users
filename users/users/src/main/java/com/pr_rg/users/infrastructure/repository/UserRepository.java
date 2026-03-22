@@ -1,6 +1,6 @@
 package com.pr_rg.users.infrastructure.repository;
 
-import com.pr_rg.users.domain.model.User;
+import com.pr_rg.users.domain.model.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.pr_rg.users.application;
 
-import com.pr_rg.users.domain.model.User;
+import com.pr_rg.users.domain.model.users.User;
 import com.pr_rg.users.infrastructure.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

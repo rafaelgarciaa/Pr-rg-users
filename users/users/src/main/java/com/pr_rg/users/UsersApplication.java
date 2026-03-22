@@ -1,5 +1,7 @@
 package com.pr_rg.users;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class UsersApplication implements CommandLineRunner {
+    private static final Logger logger = LoggerFactory.getLogger(UsersApplication.class);
 
     @Value("${custom.log.message:Mensaje por defecto}")
     private String logMessage;
@@ -17,6 +20,6 @@ public class UsersApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println(logMessage);
+        logger.info(logMessage);
     }
 }

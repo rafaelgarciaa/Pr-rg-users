@@ -1,7 +1,10 @@
 package com.pr_rg.users.infrastructure.rest;
 
 import com.pr_rg.users.application.UserService;
-import com.pr_rg.users.domain.model.User;
+import com.pr_rg.users.domain.model.users.User;
+import com.pr_rg.users.domain.model.usersDto.UserDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,14 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<User> create(@RequestBody UserDTO userDTO) {
+        // Convertimos el DTO a Entidad antes de pasarla al servicio
+        User newUser = new User();
+        newUser.setName(userDTO.name());
+        newUser.setEmail(userDTO.email());
+
+        User savedUser = userService.createUser(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     @GetMapping

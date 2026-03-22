@@ -1,4 +1,4 @@
-package com.pr_rg.users.domain.model;
+package com.pr_rg.users.domain.model.users;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

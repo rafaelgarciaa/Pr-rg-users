@@ -1,6 +1,6 @@
 package com.pr_rg.users.infrastructure.adapter;
 
-import com.pr_rg.users.domain.model.User;
+import com.pr_rg.users.domain.model.users.User;
 import com.pr_rg.users.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ public abstract class UserRepositoryAdapter implements UserRepository {
 
     private final UserRepository jpaUserRepository;
 
-    public UserRepositoryAdapter(UserRepository jpaUserRepository) {
+    protected UserRepositoryAdapter(UserRepository jpaUserRepository) {
         this.jpaUserRepository = jpaUserRepository;
     }
 
