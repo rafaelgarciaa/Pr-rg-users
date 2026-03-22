@@ -38,7 +38,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('users/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('users/users/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
