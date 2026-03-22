@@ -4,8 +4,6 @@ import jakarta.validation.Valid;
 import project_users.application.UserService;
 import project_users.domain.model.users.User;
 import project_users.domain.model.usersDto.UserDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
