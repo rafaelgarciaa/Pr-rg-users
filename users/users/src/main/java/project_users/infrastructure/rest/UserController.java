@@ -1,5 +1,6 @@
 package project_users.infrastructure.rest;
 
+import jakarta.validation.Valid;
 import project_users.application.UserService;
 import project_users.domain.model.users.User;
 import project_users.domain.model.usersDto.UserDTO;
@@ -19,14 +20,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserDTO userDTO) {
-        // Convertimos el DTO a Entidad antes de pasarla al servicio
-        User newUser = new User();
-        newUser.setName(userDTO.name());
-        newUser.setEmail(userDTO.email());
-
-        User savedUser = userService.createUser(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+    public UserDTO create(@Valid @RequestBody UserDTO userDTO) {
+        User user = new User();
+        user.setName(userDTO.name());
+        user.setEmail(userDTO.email());
+        User savedUser = userService.createUser(UserDTO.fromEntity(user));
+        return UserDTO.fromEntity(savedUser);
     }
 
     @GetMapping

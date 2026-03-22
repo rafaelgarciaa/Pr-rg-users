@@ -9,4 +9,8 @@ public record UserDTO(
         @Email(message = "El formato de email es inválido")
         @NotBlank(message = "El email es obligatorio")
         String email
-) {}
+) {
+        public static UserDTO fromEntity(project_users.domain.model.users.User user) {
+                return new UserDTO(user.getName(), user.getEmail());
+        }
+}
