@@ -32,16 +32,20 @@ class UserServiceTest {
     @BeforeEach
     void setUp() {
         userEntity = new User(1L, "Rafael Garcia", "rafa@example.com");
+        // DTO que enviamos al servicio
         userRequest = new UserDTO("Rafael Garcia", "rafa@example.com");
     }
 
     @Test
     void shouldSaveUserSuccessfully() {
-        when(userRepository.save((UserDTO) any())).thenReturn(userEntity);
+        when(userRepository.save(any(User.class))).thenReturn(userEntity);
+
         User savedUser = userService.createUser(userRequest);
+
         assertNotNull(savedUser);
+        assertEquals(1L, savedUser.getId());
         assertEquals("Rafael Garcia", savedUser.getName());
-        verify(userRepository, times(1)).save((UserDTO) any());
+        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
@@ -52,7 +56,8 @@ class UserServiceTest {
 
         assertFalse(users.isEmpty());
         assertEquals(1, users.size());
-        assertEquals("Rafael Garcia", users.getFirst().getName());
+        // Uso de get(0) para mayor compatibilidad, aunque getFirst() funciona en Java 21
+        assertEquals("Rafael Garcia", users.get(0).getName());
     }
 
     @Test
