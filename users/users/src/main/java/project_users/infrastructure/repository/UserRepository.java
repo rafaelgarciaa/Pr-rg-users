@@ -1,14 +1,15 @@
-package com.pr_rg.users.infrastructure.repository;
+package project_users.infrastructure.repository;
 
-import com.pr_rg.users.domain.model.users.User;
+import project_users.domain.model.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import project_users.domain.model.usersDto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User save(User user);
+    User save(UserDTO user);
 
     List<User> findAll();
 

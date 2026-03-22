@@ -1,4 +1,4 @@
-package com.pr_rg.users.domain.model.usersDto;
+package project_users.domain.model.usersDto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

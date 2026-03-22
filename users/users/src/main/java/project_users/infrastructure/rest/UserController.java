@@ -1,8 +1,8 @@
-package com.pr_rg.users.infrastructure.rest;
+package project_users.infrastructure.rest;
 
-import com.pr_rg.users.application.UserService;
-import com.pr_rg.users.domain.model.users.User;
-import com.pr_rg.users.domain.model.usersDto.UserDTO;
+import project_users.application.UserService;
+import project_users.domain.model.users.User;
+import project_users.domain.model.usersDto.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
