@@ -34,5 +34,5 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          proyectKey: rafaelgarciaa_Pr-rg-users
+          projectKey: rafaelgarciaa_Pr-rg-users
         run: mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.jacoco:jacoco-maven-plugin:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
