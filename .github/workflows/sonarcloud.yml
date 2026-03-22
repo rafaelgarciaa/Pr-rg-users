@@ -33,11 +33,19 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          # Actualizamos la ruta de la caché para que coincida con la estructura real
+          key: ${{ runner.os }}-m2-${{ hashFiles('users/users/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.jacoco:jacoco-maven-plugin:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=rafaelgarciaa_Pr-rg-users
+        # Usamos -f (file) para apuntar a la ruta profunda del pom.xml
+        run: >
+          mvn -B -f users/users/pom.xml
+          org.jacoco:jacoco-maven-plugin:prepare-agent 
+          verify 
+          org.jacoco:jacoco-maven-plugin:report 
+          org.sonarsource.scanner.maven:sonar-maven-plugin:sonar 
+          -Dsonar.projectKey=rafaelgarciaa_Pr-rg-users
