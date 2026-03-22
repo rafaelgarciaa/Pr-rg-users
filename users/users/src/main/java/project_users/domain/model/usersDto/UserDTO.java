@@ -39,7 +39,6 @@ public class UserDTO {
                 this.email = email;
         }
 
-        // Método estático de conversión
         public static UserDTO fromEntity(project_users.domain.model.users.User user) {
                 return new UserDTO(user.getName(), user.getEmail());
         }
