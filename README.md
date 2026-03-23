@@ -1,6 +1,17 @@
 # Users API - Clean Architecture & Spring Boot
 
-Esta solucion es una API REST construida con **Spring Boot 3.4.2**, diseñada bajo el **Estilo de Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión de usuarios (CRUD) mediante persistencia en base de datos H2.
+Este proyecto es una API REST robusta construida con **Spring Boot 3.4.2**, diseñada bajo los principios de **Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión completa de usuarios (CRUD), demostrando prácticas modernas de desarrollo, testing y despliegue continuo.
+
+## 🚀 Tecnologías y Versiones
+* **Java:** 21 (Amazon Corretto / Temurin)
+* **Framework:** Spring Boot 3.4.2
+* **Gestor de Dependencias:** Maven
+* **Base de Datos:** H2 (In-Memory para DEV / File-Based para PROD)
+* **Librerías Principales:**
+    * Spring Data JPA (Persistencia)
+    * Lombok (Productividad)
+    * Jacoco (Reporte de cobertura de tests)
+    * JUnit 5 (Testing con Junit)
 
 ---
 
@@ -12,21 +23,7 @@ El proyecto utiliza una arquitectura de capas para desacoplar la lógica de nego
 
 ---
 
-## 🚀 Tecnologias y Versiones
-* **Java:** 21 (Amazon Corretto / Temurin)
-* **Framework:** Spring Boot 3.4.2
-* **Gestor de Dependencias:** Maven
-* **Base de Datos:** H2 (In-Memory para DEV / File-Based para PROD)
-* **Librerias Principales:**
-    * Spring Data JPA (Persistencia)
-    * Lombok (Productividad)
-    * Jacoco (Reporte de cobertura de tests)
-    * JUnit 5 (Testing con Junit)
-    * Springdoc-openapi (Swagger UI)
-
----
-
-## ⚙️ Configuracion de Ambientes (Application Properties)
+## ⚙️ Configuración de Ambientes (Application Properties)
 
 El proyecto utiliza perfiles de Spring para manejar múltiples entornos. Aquí los ejemplos clave:
 
@@ -41,64 +38,34 @@ El proyecto utiliza perfiles de Spring para manejar múltiples entornos. Aquí l
 
 ## 🛣️ Endpoints Principales (REST API)
 
-El proyecto cuenta con documentacion interactiva a traves de **Swagger UI**. Una vez iniciada la aplicacion localmente, puede accederse en:
-> **URL:** `http://localhost:8080/swagger-ui.html`
+Aunque el proyecto soporta el **CRUD completo** (Create, Read, Update, Delete), el enfoque de validación en Postman y despliegue se centra en:
 
-### Ejemplos de uso mediante comandos cURL:
+* **Listar todos:** `GET /api/customers`
+* **Crear Usuario:** `POST /api/customers` (Body: `{"name": "...", "email": "..."}`)
+* **Obtener por ID:** `GET /api/customers/{id}`
+* **Eliminar:** `DELETE /api/customers/{id}`
 
-#### 1. Listar todos los clientes
-Obtiene la lista completa de clientes registrados.
-```bash
-curl --location 'http://localhost:8080/api/customers'
-2. Crear un nuevo usuario
-Registra un cliente enviando el cuerpo en formato JSON.
+---
 
-Bash
-curl --location 'http://localhost:8080/api/customers' \
---header 'Content-Type: application/json' \
---data '{
-    "name": "Rafael",
-    "email": "rafa@example.com"
-}'
-3. Obtener por ID
-Recupera los detalles de un cliente específico pasando su ID en la URL.
+## 🧪 Testing y Calidad de Código
+* **Unit Tests:** Implementados con **JUnit 5**. Los tests están funcionales y pasan todas las verificaciones de integridad del código.
+* **Sonar:** Se utilizó **Sonar** para la verificación y análisis estático de código, garantizando estándares de mantenibilidad.
 
-Bash
-curl --location 'http://localhost:8080/api/customers/1'
-4. Eliminar un usuario
-Borra un registro existente mediante su ID.
+---
 
-Bash
-curl --location --request DELETE 'http://localhost:8080/api/customers/1'
-🧪 Testing y Calidad de Codigo
-Unit Tests: Implementados con JUnit 5. Los tests son funcionales y aseguran la integridad del codigo.
+## 🐳 Docker y Despliegue en Render
 
-Sonar & Jacoco: Se utiliza Sonar para el analisis estatico y Jacoco para los reportes de cobertura de pruebas.
+El proyecto está dockerizado y se despliega en la nube utilizando **Render**.
 
-🐳 Docker y Despliegue en Render
-El proyecto esta dockerizado y se despliega automaticamente en la nube utilizando Render.
+### Estrategia de Despliegue (Web Services)
+Se han creado **dos Web Services independientes en Render** apuntando al mismo repositorio de GitHub. Esto permite ejecutar los ambientes de **DEV** y **PROD** simultáneamente en URLs y puertos aislados:
 
-🔗 Link de Despliegue: https://tu-app-en-render.onrender.com
+1.  **Web Service DEV:** Configurado con la variable de entorno `SPRING_PROFILES_ACTIVE=dev`.
+2.  **Web Service PROD:** Configurado con la variable de entorno `SPRING_PROFILES_ACTIVE=prod`.
 
-Estrategia de Despliegue (Web Services)
-Se han configurado dos Web Services independientes en Render apuntando al mismo repositorio de GitHub, permitiendo entornos aislados:
+### Construcción y Ejecución Local:
 
-Entorno DEV: Configurado con la variable de entorno SPRING_PROFILES_ACTIVE=dev.
-
-Entorno PROD: Configurado con la variable de entorno SPRING_PROFILES_ACTIVE=prod.
-
-Instrucciones de Ejecucion Local
-1. Construccion del Proyecto (Maven):
+**Build del Proyecto (Maven):**
 Para compilar y ejecutar los tests (recomendado antes de cualquier push):
-
-Bash
+```bash
 mvn clean install
-2. Ejecucion con Docker Compose:
-Si deseas levantar la infraestructura completa localmente incluyendo la base de datos:
-
-Bash
-docker-compose up --build
-3. Ejecucion Directa (Spring Boot):
-
-Bash
-mvn spring-boot:run
