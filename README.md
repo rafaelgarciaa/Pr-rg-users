@@ -1,6 +1,6 @@
 # Users API - Clean Architecture & Spring Boot
 
-Este proyecto es una API REST construida con **Spring Boot 3.4.2**, diseñada bajo el **Estilo de Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión de usuarios (CRUD) mediante persistencia en base de datos H2.
+Esta solucion es una API REST construida con **Spring Boot 3.4.2**, diseñada bajo el **Estilo de Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión de usuarios (CRUD) mediante persistencia en base de datos H2.
 
 ## 🚀 Tecnologías y Versiones
 * **Java:** 21 (Amazon Corretto / Temurin)
