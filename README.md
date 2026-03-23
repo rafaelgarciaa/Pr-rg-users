@@ -1,7 +1,6 @@
 # Users API - Clean Architecture & Spring Boot
 
-Este proyecto es una API REST robusta construida con **Spring Boot 3.4.2**, diseñada bajo los principios de **Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión completa de usuarios (CRUD), demostrando prácticas modernas de desarrollo, testing y despliegue continuo.
-
+Esta solucion es una API REST construida con **Spring Boot 3.4.2**, diseñada bajo **Arquitectura Hexagonal** (Ports and Adapters). El sistema permite la gestión de usuarios (CRUD).
 ## 🚀 Tecnologías y Versiones
 * **Java:** 21 (Amazon Corretto / Temurin)
 * **Framework:** Spring Boot 3.4.2
@@ -38,24 +37,23 @@ El proyecto utiliza perfiles de Spring para manejar múltiples entornos. Aquí l
 
 ## 🛣️ Endpoints Principales (REST API)
 
-Aunque el proyecto soporta el **CRUD completo** (Create, Read, Update, Delete), el enfoque de validación en Postman y despliegue se centra en:
+Aunque el proyecto soporta el **CRUD completo** (Create, Read, Update, Delete), el enfoque de validación en Postman y despliegue se centra en create y getAll
 
-* **Listar todos:** `GET /api/customers`
-* **Crear Usuario:** `POST /api/customers` (Body: `{"name": "...", "email": "..."}`)
-* **Obtener por ID:** `GET /api/customers/{id}`
-* **Eliminar:** `DELETE /api/customers/{id}`
+<img width="1292" height="537" alt="image" src="https://github.com/user-attachments/assets/bdd0586c-5549-4755-98f3-1325bcd11533" />
+
 
 ---
 
 ## 🧪 Testing y Calidad de Código
 * **Unit Tests:** Implementados con **JUnit 5**. Los tests están funcionales y pasan todas las verificaciones de integridad del código.
 * **Sonar:** Se utilizó **Sonar** para la verificación y análisis estático de código, garantizando estándares de mantenibilidad.
+  **Jacoco**: Se implementa con el fin de aumentar la cobertura del código
 
 ---
 
 ## 🐳 Docker y Despliegue en Render
 
-El proyecto está dockerizado y se despliega en la nube utilizando **Render**.
+El proyecto está dockerizado y se despliega en la nube utilizando **Render: https://dashboard.render.com**.
 
 ### Estrategia de Despliegue (Web Services)
 Se han creado **dos Web Services independientes en Render** apuntando al mismo repositorio de GitHub. Esto permite ejecutar los ambientes de **DEV** y **PROD** simultáneamente en URLs y puertos aislados:
