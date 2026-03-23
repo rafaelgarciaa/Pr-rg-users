@@ -39,6 +39,7 @@ El proyecto utiliza perfiles de Spring para manejar múltiples entornos. Aquí l
 ## 🛣️ Endpoints Principales (REST API)
 
 A continuación se detallan los ejemplos de uso de la API mediante comandos `curl`. El proyecto soporta el CRUD completo centrado en la entidad `customers`:
+<img width="1299" height="517" alt="image" src="https://github.com/user-attachments/assets/8c8d6d1a-6da8-4da1-8efb-e8434879759d" />
 
 ### 1. Listar todos los clientes
 Obtiene la lista completa de clientes registrados.
